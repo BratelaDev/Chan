@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ChanAI: MonoBehaviour
 {
-    public Transform player; 
+    public Transform player; // Игрок
     public AudioSource playerFootsteps;
-    public PlayerControler playerMovement;
+    public PlayerControler playerMovement; 
 
     [Header("Detection Settings")]
     public float hearingRange = 10f; // Дальность слуха
@@ -230,5 +231,12 @@ public class ChanAI: MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, visionRange); // Отображаем зону зрения
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene("Test");
+        }
     }
 }
